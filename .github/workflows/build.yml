@@ -1,0 +1,36 @@
+# Builds Wallpapers on Windows, macOS and Linux. Run it from the Actions tab to download the builds, or push a tag
+# like v1.0 to attach all three to a GitHub Release.
+name: Build
+
+on:
+  workflow_dispatch:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    strategy:
+      # The macOS and Linux builds are untested; one failing shouldn't cancel the others.
+      fail-fast: false
+      matrix:
+        # Ubuntu 22.04's older system libraries let the Linux build run on more distros.
+        os: [windows-latest, macos-latest, ubuntu-22.04]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -r requirements.txt pyinstaller
+      - run: python build.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Wallpapers-${{ matrix.os }}
+          path: build/release/*
+      - if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: build/release/*

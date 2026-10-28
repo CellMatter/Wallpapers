@@ -1,0 +1,29 @@
+# Draw at this many times the size, then scale down for smooth edges. Higher looks cleaner but renders slower.
+supersample = 4
+
+# Seconds between wallpapers; a random time in this range is picked each time.
+interval_seconds = [600, 1200]
+# Wait until every monitor is fully covered by a window before swapping, so you never see the change happen.
+# Windows only; on macOS and Linux the wallpaper changes on the timer alone.
+change_only_when_hidden = true
+
+# Command that sets the wallpaper, for desktops not supported out of the box (sway, i3, Hyprland...).
+# {path} is replaced with the image file. Leave empty to use the built-in way on Windows, macOS, GNOME, KDE Plasma,
+# XFCE, Cinnamon and MATE. Examples:
+#   wallpaper_command = ["feh", "--bg-fill", "{path}"]
+#   wallpaper_command = ["swaymsg", "output", "*", "bg", "{path}", "fill"]
+wallpaper_command = []
+
+# Tint colors. Hues are degrees on the color wheel (0 red, 60 yellow, 120 green, 180 cyan, 240 blue, 300 magenta).
+# A range may run past 360 to wrap around through red. Each wallpaper picks one range, then a hue inside it.
+hue_ranges = [
+    [335, 375],  # reds through pinks
+    [100, 160],  # greens
+    [190, 215],  # sky blues
+]
+saturation = [0.7, 1.0]
+brightness = [0.85, 1.0]
+
+# On launch, warn and offer to start at sign-in when that isn't set up yet (Windows, macOS and Linux).
+# On Linux the question needs zenity or kdialog; without either it's only printed.
+ask_startup = true
