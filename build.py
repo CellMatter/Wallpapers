@@ -1,7 +1,7 @@
 # Builds the standalone Wallpapers app, so the running process shows up as "Wallpapers" with a blank icon instead of
 # as Python, and puts it in build/release/, ready to upload: a single file on Windows and Linux, a zipped .app on macOS.
 # Everything else PyInstaller makes goes in build/work/. Needs PyInstaller (pip install pyinstaller); it only builds
-# for the OS it runs on, so .github/workflows/build.yml builds all three on GitHub.
+# for the OS it runs on, so .github/workflows/build.yml builds them all on GitHub.
 import os
 import platform
 import plistlib

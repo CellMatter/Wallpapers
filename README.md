@@ -36,7 +36,7 @@ python build.py
 ```
 
 The file to upload ends up in `build/release/`; everything else goes in `build/work/`. PyInstaller only builds for the
-system it runs on, so this gives you the build for your own OS. To get all three, push the repo to GitHub and run the
+system it runs on, so this gives you the build for your own OS. To get all of them, push the repo to GitHub and run the
 **Build** workflow from the Actions tab (the builds can be downloaded from the run), or push a tag like `v1.0` to
 attach them to a GitHub Release.
 
@@ -44,11 +44,12 @@ attach them to a GitHub Release.
 |---|---|---|
 | Windows | `Wallpapers-windows-amd64.exe` | `config.toml` next to the exe |
 | macOS | `Wallpapers-macos-arm64.zip`, containing `Wallpapers.app` | `~/Library/Application Support/Wallpapers/config.toml` |
-| Linux | `Wallpapers-linux-x86_64` | `config.toml` next to the program |
+| Linux | `Wallpapers-linux-x86_64`, or `Wallpapers-linux-aarch64` for ARM | `config.toml` next to the program |
 
 - The end of each name is the chip it was built for. GitHub builds the Mac app for Apple Silicon only; it won't run on
   Intel Macs.
-- On Linux, make the downloaded file runnable first: `chmod +x Wallpapers-linux-x86_64`.
+- On Linux, make the downloaded file runnable first: `chmod +x Wallpapers-linux-x86_64` (or `-aarch64`). Use the
+  `aarch64` one on ARM Linux, such as a Raspberry Pi or a Linux container on an Android phone; the Steam Deck is x86_64.
 - The Mac app isn't signed with an Apple Developer ID, so macOS blocks the first launch: right-click it and choose
   Open, or use System Settings → Privacy & Security → Open Anyway.
 

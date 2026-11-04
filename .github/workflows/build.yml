@@ -1,5 +1,5 @@
 # Builds Wallpapers on Windows, macOS and Linux. Run it from the Actions tab to download the builds, or push a tag
-# like v1.0 to attach all three to a GitHub Release.
+# like v1.0 to attach all of them to a GitHub Release.
 name: Build
 
 on:
@@ -16,8 +16,9 @@ jobs:
       # The macOS and Linux builds are untested; one failing shouldn't cancel the others.
       fail-fast: false
       matrix:
-        # Ubuntu 22.04's older system libraries let the Linux build run on more distros.
-        os: [windows-latest, macos-latest, ubuntu-22.04]
+        # Ubuntu 22.04's older system libraries let the Linux builds run on more distros. The -arm one is for ARM64
+        # Linux (Raspberry Pi, Android Linux containers), which would otherwise need an x86 emulator like FEX.
+        os: [windows-latest, macos-latest, ubuntu-22.04, ubuntu-22.04-arm]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
